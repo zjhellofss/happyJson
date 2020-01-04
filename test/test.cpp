@@ -3,7 +3,12 @@
 //
 
 #include "../parse/parseJson.h"
+#include <string>
+#include <iostream>
 
 int main () {
-    parseJson("101.1233");
+    using namespace std;
+    parseJson("\"hello\\tcpp\"");
+    string str("hello\t");
+    cout << str << endl;
 }

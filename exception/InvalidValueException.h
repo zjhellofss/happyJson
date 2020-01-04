@@ -10,7 +10,7 @@
 class InvalidValueException : public std::exception {
 public:
     const char *what () const noexcept override {
-        return "Empty Value";
+        return "Invalid Value";
     }
 };
 

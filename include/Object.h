@@ -21,7 +21,7 @@ public:
     Object () {}
 
     Object (std::string objectName, Type ObjectType) :
-            objectName(std::move(objectName)), ObjectType(ObjectType) {
+            objectName(std::move(objectName)), objectType(ObjectType) {
     }
 
 
@@ -62,11 +62,11 @@ public:
     }
 
     Type getObjectType () const {
-        return ObjectType;
+        return objectType;
     }
 
     void setObjectType (Type ObjectType) {
-        Object::ObjectType = ObjectType;
+        Object::objectType = ObjectType;
     }
 
     const std::map<std::string, std::shared_ptr<Object>> &
@@ -79,7 +79,7 @@ public:
 private:
     std::string objectName = "";
     std::map<std::string, std::shared_ptr<Object>> values;
-    Type ObjectType;
+    Type objectType;
 };
 
 

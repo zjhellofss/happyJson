@@ -10,10 +10,12 @@
 class Integer : public Object {
 public:
     Integer () {
-
+        this->setObjectType(Type::Integer);
     }
 
-    explicit Integer (double val) : val(val) {}
+    explicit Integer (double val) : val(val) {
+        this->setObjectType(Type::Integer);
+    }
 
     double getVal () const {
         return val;
