@@ -7,5 +7,7 @@
 
 #include "Integer.h"
 #include "Object.h"
+#include "Array.h"
+#include "String.h"
 
 #endif //HAPPYJSON2_JSON_OBJECT_H

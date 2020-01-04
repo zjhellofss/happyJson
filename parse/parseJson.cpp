@@ -7,12 +7,14 @@
 #include <fstream>
 #include <cmath>
 #include <vector>
+
 #include "../include/JsonObject.h"
+#include "../include/String.h"
+#include "../include/Array.h"
+
 #include "../exception/EmptyValueException.h"
 #include "../exception/InvalidValueException.h"
 #include "../exception/InvalidStringException.h"
-#include "../include/String.h"
-#include "../include/Array.h"
 #include "../exception/InvalidArrException.h"
 #include "../exception/InvalidObjectException.h"
 
