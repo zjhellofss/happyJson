@@ -18,7 +18,8 @@ class Object {
 
 public:
 
-    Object () {}
+    Object () {
+    }
 
     Object (std::string objectName, Type ObjectType) :
             objectName(std::move(objectName)), objectType(ObjectType) {
