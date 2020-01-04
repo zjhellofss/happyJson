@@ -151,11 +151,11 @@ static String *parseString (const std::string &json, int &pos) {
 }
 
 
-static Array *parseArray (const std::string &json, int pos);
+static Array *parseArray (const std::string &json, int &pos);
 
 static Integer *parseNumber (const std::string &json, int &pos);
 
-static Object *parseObject (const std::string &json, int pos);
+static Object *parseObject (const std::string &json, int &pos);
 
 //fixme 存在内存泄漏的情况
 static Object *parseJson_ (std::string json, int &pos) {
@@ -218,7 +218,7 @@ static Object *parseJson_ (std::string json, int &pos) {
 }
 
 
-static Object *parseObject (const std::string &json, int pos) {
+static Object *parseObject (const std::string &json, int &pos) {
     assert(json[pos] == '{');
     pos++;
     Object *obj = nullptr;
@@ -229,9 +229,9 @@ static Object *parseObject (const std::string &json, int pos) {
         if (json[pos] != '"') {
             throw InvalidObjectException("Invalid object");
         } else {
+            obj = new Object("", Type::Object);
             while (true) {
                 std::string name(parseString(json, pos)->getStrVal());
-                obj = new Object(name, Type::Object);
                 skipSpace(json, pos);
                 if (json[pos] == ':') {
                     pos++;
@@ -240,6 +240,7 @@ static Object *parseObject (const std::string &json, int pos) {
                     obj = nullptr;
                     throw InvalidObjectException("Invalid object");
                 }
+                skipSpace(json, pos);
                 //读取键值对的值
                 Object *childObj = parseJson_(json, pos);
                 obj->setValue(name, childObj);
@@ -264,7 +265,7 @@ static Object *parseObject (const std::string &json, int pos) {
 }
 
 
-static Array *parseArray (const std::string &json, int pos) {
+static Array *parseArray (const std::string &json, int &pos) {
     assert(json[pos] == '[');
     pos++;
     int len = static_cast<int>(json.size());
@@ -372,7 +373,32 @@ static Integer *parseNumber (const std::string &json, int &pos) {
 
 Object *parseJson (const std::string &json) {
     int pos = 0;
+    skipSpace(json, pos);
+    pos++;//skip '{'
+    skipSpace(json, pos);
     int len = static_cast<int>(json.size());
-    parseJson_(json, pos);
-    return 0;
+    Object *root = new Object("root", Type::Object);
+    while (pos < len) {
+        skipSpace(json, pos);
+        if (json[pos] == '}') {
+            break;
+        }
+        std::string name(parseString(json, pos)->getStrVal());
+        skipSpace(json, pos);
+        if (json[pos] == ':') {
+            pos++;
+        } else {
+            throw InvalidObjectException("Invalid Object");
+        }
+        Object *res = parseJson_(json, pos);
+        root->setValue(name, res);
+        skipSpace(json, pos);
+        if (json[pos] == ',') {
+            pos++;
+        }
+        skipSpace(json, pos);
+
+    }
+    return root;
 }
+
