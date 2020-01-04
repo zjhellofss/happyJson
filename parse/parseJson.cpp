@@ -379,7 +379,7 @@ Object *parseJson (const std::string &json) {
     pos++;//skip '{'
     skipSpace(json, pos);
     int len = static_cast<int>(json.size());
-    Object *root = new Object("root", Type::Object);
+    Object *root = new Object("", Type::Object);
     while (pos < len) {
         skipSpace(json, pos);
         if (json[pos] == '}') {

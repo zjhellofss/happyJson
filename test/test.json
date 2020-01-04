@@ -1,20 +1,7 @@
 {
-  "aaa": "fss",
   "obj": {
     "name": "fss",
     "age3": 31,
-    "flag": true,
-    "zzz": [
-      1,
-      2,
-      3,
-      "flla"
-    ]
-  },
-  "harr": [
-    1,
-    2,
-    3,
-    "true"
-  ]
+    "flag": true
+  }
 }
