@@ -13,9 +13,7 @@ int main () {
     using namespace std;
     Object *object = parseJson("{\n"
                                "  \"obj\": {\n"
-                               "    \"name\": \"fss\",\n"
-                               "    \"age3\": 31,\n"
-                               "    \"flag\": true\n"
+                               "    \"name\": \"fss\"\n"
                                "  }\n"
                                "}");
 //    Object *nameObject = object->getValue("aaa");

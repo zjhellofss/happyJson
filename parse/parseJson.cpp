@@ -93,7 +93,7 @@ static String *parseString (const std::string &json, int &pos) {
     std::vector<char> stk;
     while (*p != '\0') {
         char ch = *p++;
-        if (isalpha(ch)) {
+        if (isalpha(ch) || isnumber(ch)) {
             stk.push_back(ch);
         } else if (ch == '\\') {
             switch (*p) {
