@@ -22,6 +22,10 @@
     auto item = JsonUtil::getJsonVecByIndex<std::string>()(vec, 0);
     //释放资源
     JsonUtil::deleteJsonObject(object);
+    //对json的字符串化
+    SerializeJson serializeJson;
+    serializeJson.serializeObject(object);
+    std::string str1 = serializeJson.getOutput();
 
 ```
 
